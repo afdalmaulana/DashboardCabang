@@ -1,11 +1,11 @@
 <?php if (isset($_GET['status'])): ?>
-    <script src="../js/sweetalert2.all.min.js"></script> <!-- Pastikan path dan nama file JS benar -->
+    <script src="../js/sweetalert.all.min.js"></script> <!-- Pastikan path dan nama file JS benar -->
     <script>
         <?php if ($_GET['status'] === 'success'): ?>
             Swal.fire({
                 icon: 'success',
-                title: 'Berhasil!',
-                // html: 'Data berhasil disimpan sebanyak <strong><?php echo htmlspecialchars($_GET["jumlah"] ?? '-'); ?></strong> surat.',
+                // title: 'Surat Keluar Berhasil di Buat!',
+                html: 'Data berhasil disimpan sebanyak <strong><?php echo htmlspecialchars($_GET["jumlah"] ?? '-'); ?></strong> surat.',
                 timer: 3000,
             });
         <?php elseif ($_GET['status'] === 'incomplete'): ?>
