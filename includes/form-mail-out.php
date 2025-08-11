@@ -1,15 +1,13 @@
 <?php if (isset($_GET['status'])): ?>
-    <script src="../js/sweetalert.all.min.js"></script>
+    <script src="../js/sweetalert2.all.min.js"></script> <!-- Pastikan path dan nama file JS benar -->
     <script>
         <?php if ($_GET['status'] === 'success'): ?>
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
-                html: 'Data berhasil disimpan sebanyak <strong><?= htmlspecialchars($_GET["jumlah"]) ?></strong> surat.',
+                // html: 'Data berhasil disimpan sebanyak <strong><?php echo htmlspecialchars($_GET["jumlah"] ?? '-'); ?></strong> surat.',
                 timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false
-            })
+            });
         <?php elseif ($_GET['status'] === 'incomplete'): ?>
             Swal.fire({
                 icon: 'warning',
@@ -22,11 +20,17 @@
                 title: 'Kesalahan Server!',
                 text: 'Gagal menyiapkan query.',
             });
+        <?php elseif ($_GET['status'] === 'error_execute'): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: 'Gagal menyimpan data ke database.',
+            });
         <?php endif; ?>
     </script>
 <?php endif; ?>
 
-<form action="connect_suratKeluar.php" method="POST">
+<form action="mailOut_connect.php" method="POST" onsubmit="return showLoading();">
     <div class="dashboard-mailin">
         <div class="form-input">
             <div style="font-size: 32px; margin-top: 12px; font-weight:700">Formulir Surat Keluar</div>
@@ -60,3 +64,17 @@
         </div>
     </div>
 </form>
+
+<script>
+    function showLoading() {
+        Swal.fire({
+            title: 'Menyimpan...',
+            text: 'Mohon tunggu.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        return true; // Lanjut submit
+    }
+</script>

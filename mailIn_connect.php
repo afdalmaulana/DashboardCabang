@@ -17,7 +17,7 @@ $perihal = $_POST['perihal'] ?? '';
 
 // Validasi sederhana
 if (!$tanggal || !$pengirim || !$tujuan_surat || !$perihal) {
-    header("Location: index.php?page=formInMail&status=incomplete");
+    header("Location: index.php?page=form-mail-in&status=incomplete");
     exit;
 }
 
@@ -30,13 +30,13 @@ if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
 
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
     if (!in_array($file_ext, $allowed)) {
-        header("Location: index.php?page=formInMail&status=invalidfile");
+        header("Location: index.php?page=form-mail-in&status=invalidfile");
         exit;
     }
 
     $nama_gambar = uniqid('img_') . '.' . $file_ext;
     if (!move_uploaded_file($file_tmp, $upload_dir . $nama_gambar)) {
-        header("Location: index.php?page=formInMail&status=uploadfail");
+        header("Location: index.php?page=form-mail-in&status=uploadfail");
         exit;
     }
 }
@@ -47,9 +47,9 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("sssss", $tanggal, $pengirim, $tujuan_surat, $nama_gambar, $perihal);
 
 if ($stmt->execute()) {
-    header("Location: index.php?page=formInMail&status=success");
+    header("Location: index.php?page=form-mail-in&status=success");
 } else {
-    header("Location: index.php?page=formInMail&status=error");
+    header("Location: index.php?page=form-mail-in&status=error");
 }
 
 $stmt->close();

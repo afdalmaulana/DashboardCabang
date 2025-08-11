@@ -35,7 +35,7 @@
     </script>
 <?php endif; ?>
 
-<form action="connect_suratMasuk.php" method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
+<form action="mailIn_connect.php" method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
     <div class="dashboard-mailin">
         <div class="form-input">
             <div style="font-size: 32px; margin-top: 12px; font-weight:700;">Formulir Surat Masuk</div>
