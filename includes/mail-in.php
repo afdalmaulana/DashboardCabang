@@ -1,10 +1,6 @@
 <?php
 require 'db_connect.php'; // Koneksi database
 
-// PROSES HAPUS (ditangani sebelum output HTML)
-$successMessage = '';
-$errorMessage = '';
-
 // if ($_SERVER["REQUEST_METHOD"] === "POST") {
 //     $id = intval($_POST['id']);
 //     $pengirim = $_POST['pengirim'];
@@ -42,30 +38,6 @@ $result = $conn->query($query);
 ?>
 
 <div class="dashboard-mailin">
-
-    <!-- Tampilkan pesan sukses/error jika ada -->
-    <?php if ($successMessage): ?>
-        <div class="alert alert-success" style="
-            padding: 15px; 
-            background-color: #f44336; 
-            color: white; 
-            margin-bottom: 15px; 
-            border-radius: 5px;
-            font-weight: bold;">
-            <?= $successMessage ?>
-        </div>
-    <?php elseif ($errorMessage): ?>
-        <div class="alert alert-error" style="
-            padding: 15px; 
-            background-color: #f44336; 
-            color: white; 
-            margin-bottom: 15px; 
-            border-radius: 5px;
-            font-weight: bold;">
-            <?= $errorMessage ?>
-        </div>
-    <?php endif; ?>
-
     <div class="mail-count">
         <div><?php echo $result->num_rows; ?></div>
         <div>Jumlah Semua Surat</div>

@@ -5,14 +5,39 @@ $stokQuery = "SELECT nama_barang FROM stok_barang ORDER BY nama_barang ASC";
 $stokResult = $conn->query($stokQuery);
 ?>
 
+<?php if (isset($_GET['status'])): ?>
+    <script src="../js/sweetalert.all.min.js"></script>
+    <script>
+        <?php if ($_GET['status'] === 'success'): ?>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: 'Data Berhasil disimpan'
+            });
+        <?php elseif ($_GET['status'] === 'error'): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Terjadi kesalahan dalam form, mohon di ulangi'
+            })
+        <?php elseif ($_GET['status'] === 'incomplete'): ?>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Data tidak lengkap',
+                text: 'Harap lengkapi semua form.'
+            });
+        <?php endif; ?>
+    </script>
+<?php endif; ?>
 
-<form action="connect_barangKeluar.php" method="POST">
+
+<form action="stockOut_connect.php" method="POST" onsubmit="return showLoading()">
     <div class="dashboard-mailin">
         <div class="form-input">
             <div style="display: flex; flex-direction:row; justify-content:space-between;">
                 <div style="font-size: 32px; margin-top: 12px; font-weight:700">Formulir Barang Keluar</div>
-                <a href="index.php?page=logLogisticOut" class="button-ryc">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i> Lihat Log
+                <a href="index.php?page=log-stock-out" class="button-log">
+                    <i class="fa fa-trash-o" aria-hidden="true" onclick="return loadingLink(this, event)"></i> Lihat Log
                 </a>
             </div>
             <p>Masukkan sesuai dengan ketentuan yang berlaku</p>
@@ -41,7 +66,6 @@ $stokResult = $conn->query($stokQuery);
                     <option value="ADK">Administrasi Keuangan</option>
                     <option value="RMFT">RMFT</option>
                 </select>
-
                 <div>
                     <button type="submit" id="submitBtn" class="button-send">Kirim</button>
                 </div>

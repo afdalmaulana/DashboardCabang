@@ -442,15 +442,23 @@
             transition: 0.2s ease-in-out;
         }
 
-        .button-ryc {
+        .button-log {
             background: #00529c;
             text-decoration: none;
             color: white;
             border: none;
             border-radius: 10px;
             padding: 12px;
+            height: 100%;
+            /* width: 100%; */
             font-size: 12px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .button-log:hover {
+            transition: 0.2s ease-in-out;
+            color: white;
+            background: green;
         }
 
         .button-ryc:hover {
@@ -493,13 +501,14 @@
         }
 
         .table-container {
-            border: 2px solid #00529c;
+            border: 3px solid #00529c;
             width: 100%;
-            border-collapse: collapse;
+            /* border-collapse: collapse; */
             table-layout: fixed;
             max-height: 350px;
             overflow-x: auto;
             overflow-y: auto;
+            border-radius: 8px;
         }
 
         /* Sticky header agar tetap terlihat saat scroll */
@@ -517,7 +526,7 @@
         .table-container table th,
         .table-container table td {
             padding: 12px;
-            border: 1px solid #ddd;
+            /* border: 1px solid #ddd; */
             overflow: auto;
             text-overflow: ellipsis;
             white-space: nowrap;

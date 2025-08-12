@@ -12,8 +12,8 @@
                     Tulis Surat
                 </button>
                 <div class="dropdown-content" id="dropdownContent">
-                    <a href="index.php?page=form-mail-in">Surat Masuk</a>
-                    <a href="index.php?page=form-mail-out">Surat Keluar</a>
+                    <a href="index.php?page=form-mail-in" onclick="return loadingLink(this, event)">Surat Masuk</a>
+                    <a href="index.php?page=form-mail-out" onclick="return loadingLink(this, event)">Surat Keluar</a>
                 </div>
             </div>
 
@@ -23,8 +23,8 @@
                     Tulis Barang
                 </button>
                 <div class="dropdown-content" id="dropdownContentLogistic">
-                    <a href="index.php?page=stock-in">Barang Masuk</a>
-                    <a href="index.php?page=stock-out">Barang Keluar</a>
+                    <a href="index.php?page=stock-in" onclick="return loadingLink(this, event)">Barang Masuk</a>
+                    <a href="index.php?page=stock-out" onclick="return loadingLink(this, event)">Barang Keluar</a>
                 </div>
             </div>
             <!-- <a href="index.php?page=formInMail" class="menu-item">Tulis Surat Masuk</a>

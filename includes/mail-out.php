@@ -32,27 +32,6 @@ $result = $conn->query($query);
 ?>
 
 <div class="dashboard-mailin">
-    <?php if ($successMessage): ?>
-        <div class="alert alert-success" style="
-            padding: 15px; 
-            background-color: #4CAF50; 
-            color: white; 
-            margin-bottom: 15px; 
-            border-radius: 5px;
-            font-weight: bold;">
-            <?= $successMessage ?>
-        </div>
-    <?php elseif ($errorMessage): ?>
-        <div class="alert alert-error" style="
-            padding: 15px; 
-            background-color: #f44336; 
-            color: white; 
-            margin-bottom: 15px; 
-            border-radius: 5px;
-            font-weight: bold;">
-            <?= $errorMessage ?>
-        </div>
-    <?php endif; ?>
     <div class="mail-count">
         <div><?php echo $result->num_rows; ?></div>
         <div>Jumlah Semua Surat</div>
@@ -61,9 +40,9 @@ $result = $conn->query($query);
         <h4>Surat Keluar</h4>
         <div class="sub-menu" style="display: flex; flex-direction:row; justify-content:space-between;">
             <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Cari surat..." class="list-input">
-            <button class="button-ryc" onclick="window.location.href='index.php?page=garbage'">
+            <!-- <button class="button-ryc" onclick="window.location.href='index.php?page=garbage'">
                 <i class="fa fa-trash-o" aria-hidden="true"></i> Lihat Tempat Sampah
-            </button>
+            </button> -->
 
         </div>
         <div class="table-container">
@@ -76,7 +55,7 @@ $result = $conn->query($query);
                         <th>Pengirim</th>
                         <th>Tujuan Surat</th>
                         <th>Perihal</th>
-                        <th></th>
+                        <!-- <th></th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -90,11 +69,11 @@ $result = $conn->query($query);
                                 <td><?= htmlspecialchars($row['pengirim']) ?></td>
                                 <td><?= htmlspecialchars($row['tujuan_surat']) ?></td>
                                 <td><?= htmlspecialchars($row['perihal']) ?></td>
-                                <td>
+                                <!-- <td>
                                     <button class='button-trash' onclick="deleteRow(this, <?= intval($row['id']) ?>)">
                                         <i class='fa fa-trash-o'></i>
                                     </button>
-                                </td>
+                                </td> -->
                                 <td>
                                     <button class=" button-trash" onclick="editRowInline(this, <?= intval($row['id']) ?>)">
                                         Edit <i class="fa fa-pencil-square-o"></i>

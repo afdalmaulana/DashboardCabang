@@ -9,7 +9,7 @@ $jumlah = intval($_POST['jumlah'] ?? 0); // pastikan jumlah angka
 
 // Validasi sederhana
 if (!$tanggal || !$nomor_register || !$nama_barang || $jumlah <= 0) {
-    die("Data tidak lengkap, mohon isi semua field!");
+    header("Location: index.php?page=stock-in.php&status=incomplete");
 }
 
 // Simpan ke tabel barang_masuk
@@ -39,21 +39,9 @@ if ($stmt->execute()) {
     // ==== END update stok_barang ====
 
     // Tampilkan pesan sukses
-    echo '
-    <div class="alert alert-success" style="padding:15px;background-color:#4CAF50;color:white;border-radius:5px;">
-        Data berhasil disimpan dan stok terupdate! Mengarahkan dalam 3 detik...
-    </div>
-    <script>
-        setTimeout(function() {
-            window.location.href = "index.php?page=logLogisticIn";
-        }, 3000);
-    </script>
-    ';
+    header("Location: index.php?page=stock-in&status=success");;
 } else {
-    echo '
-    <div class="alert alert-error" style="padding:15px;background-color:#f44336;color:white;border-radius:5px;">
-        Error: ' . htmlspecialchars($stmt->error) . '
-    </div>';
+    header("Location: index.php?page=stock-in&status=error");
 }
 
 $stmt->close();

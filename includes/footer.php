@@ -108,8 +108,24 @@
     function showLoading() {
         const btn = document.getElementById("submitBtn");
         btn.disabled = true;
-        btn.textContent = "Mengirim ...";
+        // btn.textContent = "Mengirim ...";
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
         return true;
+    }
+
+    function loadingLink(link, event) {
+        event.preventDefault(); // Cegah redirect langsung
+        const originalText = link.innerHTML;
+
+        link.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Memuat...';
+        link.style.pointerEvents = 'none'; // Biar nggak bisa diklik lagi
+
+        // Redirect setelah 500ms agar spinner terlihat
+        setTimeout(() => {
+            window.location.href = link.href;
+        }, 500);
+
+        return false;
     }
 
     function showLoadingDel(button) {
