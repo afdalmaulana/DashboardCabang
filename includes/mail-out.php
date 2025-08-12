@@ -77,30 +77,36 @@ $result = $conn->query($query);
                         <th>Tujuan Surat</th>
                         <th>Perihal</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['tanggal']) . "</td>";
-                            // echo "<td>" . htmlspecialchars($row['nomor_surat']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['pengirim']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['tujuan_surat']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['perihal']) . "</td>";
-                            echo "<td>
-            <button class='button-trash' onclick='deleteRow(this, " . intval($row['id']) . ")'>
-                <i class='fa fa-trash-o'></i>
-            </button>
-          </td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo '<tr><td colspan="5" style="text-align:center;">Belum ada data surat keluar</td></tr>';
-                    }
-                    ?>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['id']) ?></td>
+                                <td><?= htmlspecialchars($row['tanggal']) ?></td>
+                                <!-- <td><?= htmlspecialchars($row['nomor_surat']) ?></td> -->
+                                <td><?= htmlspecialchars($row['pengirim']) ?></td>
+                                <td><?= htmlspecialchars($row['tujuan_surat']) ?></td>
+                                <td><?= htmlspecialchars($row['perihal']) ?></td>
+                                <td>
+                                    <button class='button-trash' onclick="deleteRow(this, <?= intval($row['id']) ?>)">
+                                        <i class='fa fa-trash-o'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class=" button-trash" onclick="editRowInline(this, <?= intval($row['id']) ?>)">
+                                        Edit <i class="fa fa-pencil-square-o"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" style="text-align:center;">Belum ada data surat keluar</td>
+                        </tr>;
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

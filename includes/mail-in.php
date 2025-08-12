@@ -5,35 +5,35 @@ require 'db_connect.php'; // Koneksi database
 $successMessage = '';
 $errorMessage = '';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = intval($_POST['id']);
-    $pengirim = $_POST['pengirim'];
-    $tujuan = $_POST['tujuan_surat'];
-    $perihal = $_POST['perihal'];
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//     $id = intval($_POST['id']);
+//     $pengirim = $_POST['pengirim'];
+//     $tujuan = $_POST['tujuan_surat'];
+//     $perihal = $_POST['perihal'];
 
-    $stmt = $conn->prepare("UPDATE surat_masuk SET pengirim = ?, tujuan_surat = ?, perihal = ? WHERE id = ?");
-    $stmt->bind_param("sssi", $pengirim, $tujuan, $perihal, $id);
+//     $stmt = $conn->prepare("UPDATE surat_masuk SET pengirim = ?, tujuan_surat = ?, perihal = ? WHERE id = ?");
+//     $stmt->bind_param("sssi", $pengirim, $tujuan, $perihal, $id);
 
-    if ($stmt->execute()) {
-        echo '
-        <div class="alert alert-success">Surat berhasil dikembalikan.</div>
-        ';
-        echo '
-            <script>
-                setTimeout(function() {
-                    window.location.href = "index.php?page=mail-in";
-                }, 3000);
-            </script>
-            ';
-    } else {
-        echo "error: " . $stmt->error;
-    }
+//     if ($stmt->execute()) {
+//         echo '
+//         <div class="alert alert-success">Surat berhasil dikembalikan.</div>
+//         ';
+//         echo '
+//             <script>
+//                 setTimeout(function() {
+//                     window.location.href = "index.php?page=mail-in";
+//                 }, 3000);
+//             </script>
+//             ';
+//     } else {
+//         echo "error: " . $stmt->error;
+//     }
 
-    $stmt->close();
-    $conn->close();
-} else {
-    // echo "Invalid request";
-}
+//     $stmt->close();
+//     $conn->close();
+// } else {
+//     // echo "Invalid request";
+// }
 include 'includes/header.php';
 
 // Ambil data dari database

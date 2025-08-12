@@ -21,7 +21,7 @@ $outstocks = $conn->query($query)
                 <div><i class="fa fa-envelope-open-o" style="font-size: 48px; padding-right: 32px; padding-top: 6px;"></i></div>
             </div>
             <div class="list-mailinvent">Jumlah Surat Masuk</div>
-            <a href="index.php?page=inMail" class="button-list">Lihat Semua</a>
+            <a href="index.php?page=mail-in" class="button-list">Lihat Semua</a>
             <!-- <button class="button-list">Lihat Semua </button> -->
         </div>
         <div class="dash-list-outmail">
@@ -30,7 +30,7 @@ $outstocks = $conn->query($query)
                 <div><i class="fa fa-envelope-o" style="font-size: 48px; padding-right: 32px; padding-top: 6px;"></i></div>
             </div>
             <div class="list-mailinvent">Jumlah Surat Keluar</div>
-            <a href="index.php?page=outMail" class="button-list">Lihat Semua</a>
+            <a href="index.php?page=mail-out" class="button-list">Lihat Semua</a>
             <!-- <button class="button-list">Lihat Semua</button> -->
         </div>
         <div class="dash-list-outlogistic">
@@ -39,7 +39,7 @@ $outstocks = $conn->query($query)
                 <div><i class="fa fa-archive" style="font-size: 48px; padding-right: 32px; padding-top: 6px;"></i></div>
             </div>
             <div class="list-mailinvent">Jumlah Barang Keluar</div>
-            <a href="index.php?page=logLogisticOut" class="button-list">Lihat Semua</a>
+            <a href="index.php?page=log-stock-out" class="button-list">Lihat Semua</a>
             <!-- <button class="button-list">Lihat Semua</button> -->
         </div>
         <div class="dash-list-inlogistic">
@@ -48,7 +48,7 @@ $outstocks = $conn->query($query)
                 <div><i class="fa fa-archive" style="font-size: 48px; padding-right: 32px; padding-top: 6px;"></i></div>
             </div>
             <div class="list-mailinvent">Jumlah Stok Barang</div>
-            <a href="index.php?page=stock" class="button-list">Lihat Semua</a>
+            <a href="index.php?page=stocks" class="button-list">Lihat Semua</a>
             <!-- <button class="button-list">Lihat Semua</button> -->
         </div>
     </div>
