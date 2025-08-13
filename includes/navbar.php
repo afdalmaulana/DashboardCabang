@@ -7,6 +7,10 @@
 
         <!-- Bagian Kanan -->
         <div class="nav-right">
+            <div class="button-signin">
+                <!-- <button>Sign in</button> -->
+                <a href="index.php?page=signin" onclick="return loadingLink(this, event)">Surat Masuk</a>
+            </div>
             <div class="nav-right dropdown">
                 <button class="button-dropdown dropdown-toggle" onclick="toggleDropdown('dropdownContent')">
                     Tulis Surat

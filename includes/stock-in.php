@@ -23,6 +23,18 @@
     </script>
 <?php endif; ?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('tanggal').value = formattedDate;
+    });
+</script>
+
 <form action="stockIn_connect.php" method="POST" onsubmit="return showLoading()">
     <div class="dashboard-mailin">
         <div class="form-input">
@@ -34,10 +46,15 @@
             </div>
             <p>Masukkan sesuai dengan ketentuan yang berlaku</p>
             <div class="input-mail">
-                <input type="date" name="tanggal" class="list-input" placeholder="Tanggal" style="border-radius: 10px;">
-                <input type="text" name="nomor_register" class="list-input" placeholder="Nomor Register" style="border-radius: 10px;">
+                <input type="date" id="tanggal" name="tanggal" class="list-input" placeholder="Tanggal" style="border-radius: 10px;" required readonly>
+                <div style="display: flex; flex-direction:column">
+                    <label>Tanggal Nota</label>
+                    <input type="date" name="tanggal_nota" class="list-input" placeholder="Tanggal Nota" style="border-radius: 10px;">
+                </div>
+                <input type="text" name="nomor_nota" class="list-input" placeholder="Nomor Nota" style="border-radius: 10px;">
                 <input type="text" name="nama_barang" class="list-input" placeholder="Nama Barang" style="border-radius: 10px;">
-                <input type="text" name="jumlah" class="list-input" placeholder="Jumlah" style="border-radius: 10px;">
+                <input type="text" name="harga_barang" class="list-input" placeholder="Harga" style="border-radius: 10px;">
+                <input type="number" name="jumlah" class="list-input" placeholder="Jumlah" style="border-radius: 10px;">
                 <div class="">
                     <button type="submit" id="submitBtn" class="button-send">Kirim</button>
                 </div>

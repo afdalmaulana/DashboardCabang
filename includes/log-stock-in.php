@@ -20,9 +20,11 @@ $result = $conn->query($query)
             <table id="dataTable" style="width:100%; border-collapse:collapse;">
                 <thead>
                     <tr>
-                        <th>Nomor Register</th>
-                        <th>Tanggal</th>
+                        <th>Nomor Nota</th>
+                        <th>Tanggal Input</th>
+                        <th>Tanggal Nota</th>
                         <th>Nama Barang</th>
+                        <th>Harga Barang Satuan</th>
                         <th>Jumlah</th>
                         <th></th>
                     </tr>
@@ -32,9 +34,11 @@ $result = $conn->query($query)
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['nomor_register']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['nomor_nota']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['tanggal']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['tanggal_nota']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['nama_barang']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['harga_barang']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['jumlah']) . "</td>";
                             echo "<td></td>"; // kolom kosong terakhir
                             echo "</tr>";

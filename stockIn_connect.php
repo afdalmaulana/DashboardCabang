@@ -3,19 +3,21 @@ require 'db_connect.php';
 
 // Ambil data form
 $tanggal = $_POST['tanggal'] ?? '';
-$nomor_register = $_POST['nomor_register'] ?? '';
+$tanggal_nota = $_POST['tanggal_nota'] ?? '';
+$nomor_nota = $_POST['nomor_nota'] ?? '';
 $nama_barang = $_POST['nama_barang'] ?? '';
+$harga_barang = $_POST['harga_barang'] ?? '';
 $jumlah = intval($_POST['jumlah'] ?? 0); // pastikan jumlah angka
-
 // Validasi sederhana
-if (!$tanggal || !$nomor_register || !$nama_barang || $jumlah <= 0) {
-    header("Location: index.php?page=stock-in.php&status=incomplete");
+if (empty($tanggal) || empty($tanggal_nota) || empty($nomor_nota) || empty($nama_barang) || empty($harga_barang) || $jumlah <= 0) {
+    header("Location: index.php?page=stock-in&status=incomplete");
+    exit;
 }
 
 // Simpan ke tabel barang_masuk
-$sql = "INSERT INTO barang_masuk (tanggal, nomor_register, nama_barang, jumlah) VALUES (?, ?, ?, ?)";
+$sql = "INSERT INTO barang_masuk (tanggal, tanggal_nota, nomor_nota, nama_barang, harga_barang, jumlah) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssi", $tanggal, $nomor_register, $nama_barang, $jumlah);
+$stmt->bind_param("sssssi", $tanggal, $tanggal_nota, $nomor_nota, $nama_barang, $harga_barang, $jumlah);
 
 if ($stmt->execute()) {
 

@@ -493,7 +493,24 @@
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            /* gap: 5px; */
+            max-width: 500px;
+        }
+
+        .dashboard_login {
+            padding: 10px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            /* gap: 5px; */
+            max-width: 500px;
+        }
+
+        .login-wrapper {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .sub-menu {
@@ -570,6 +587,8 @@
             /* max-height: 550px; */
             overflow-y: auto;
             border-radius: 8px;
+            text-align: center;
+            justify-content: center;
         }
 
         .input-mail {

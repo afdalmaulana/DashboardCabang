@@ -84,7 +84,7 @@ $result = $conn->query($query);
                     <?php else: ?>
                         <tr>
                             <td colspan="5" style="text-align:center;">Belum ada data surat keluar</td>
-                        </tr>;
+                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>

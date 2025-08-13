@@ -30,7 +30,17 @@ $stokResult = $conn->query($stokQuery);
     </script>
 <?php endif; ?>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
 
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('tanggal').value = formattedDate;
+    });
+</script>
 <form action="stockOut_connect.php" method="POST" onsubmit="return showLoading()">
     <div class="dashboard-mailin">
         <div class="form-input">
@@ -42,7 +52,8 @@ $stokResult = $conn->query($stokQuery);
             </div>
             <p>Masukkan sesuai dengan ketentuan yang berlaku</p>
             <div class="input-mail">
-                <input type="date" name="tanggal" class="list-input" placeholder="Tanggal" style="border-radius: 10px;" required>
+                <!-- <input type="date" name="tanggal" class="list-input" placeholder="Tanggal" style="border-radius: 10px;" required> -->
+                <input type="date" id="tanggal" name="tanggal" class="list-input" placeholder="Tanggal" style="border-radius: 10px;" required readonly>
 
                 <select name="nama_barang" class="list-input" required style="border-radius: 10px;">
                     <option value="" disabled selected hidden>Pilih Nama Barang</option>
@@ -59,7 +70,7 @@ $stokResult = $conn->query($stokQuery);
 
                 <input type="number" name="jumlah" class="list-input" placeholder="Jumlah" style="border-radius: 10px;" required>
                 <select name="divisi" class="list-input" required style="border-radius: 10px;">
-                    <option value="" disabled selected hidden>Pilih Divisi</option>
+                    <option value="" disabled selected hidden>Pilih Departemen</option>
                     <option value="OPS">Operasional</option>
                     <option value="HC">Human Capital</option>
                     <option value="LOG">Logistik</option>
