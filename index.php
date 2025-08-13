@@ -28,7 +28,10 @@ if (!isset($_SESSION['user'])) {
             'mail-out',
             'stocks',
             'stock-in',
-            'stock-out'
+            'stock-out',
+            'add-user',
+            'submission-in',
+            'submission-out'
         ];
 
         if (in_array($page, $allowed_pages)) {

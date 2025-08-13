@@ -42,6 +42,7 @@
         #side-left {
             margin-top: 12px;
             display: flex;
+            flex-direction: column;
             color: white;
             justify-content: space-between;
             padding: 12px 16px;
@@ -494,24 +495,10 @@
             display: flex;
             flex-direction: column;
             /* gap: 5px; */
-            max-width: 500px;
+            /* max-width: 500px; */
         }
 
-        .dashboard_login {
-            padding: 10px;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            /* gap: 5px; */
-            max-width: 500px;
-        }
 
-        .login-wrapper {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
         .sub-menu {
             padding-bottom: 10px;
@@ -589,6 +576,72 @@
             border-radius: 8px;
             text-align: center;
             justify-content: center;
+        }
+
+
+        /* FORM LOGIN */
+        .form-input-login {
+            border: 6px solid #dbe5edff;
+            padding: 20px 40px 30px 40px;
+            /* max-height: 550px; */
+            overflow-y: auto;
+            border-radius: 20px;
+            text-align: center;
+            justify-content: center;
+            background-image: linear-gradient(#dbe5edff, #dfe7edff, #dbe5edff);
+        }
+
+        .dashboard_login {
+            padding: 30px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            /* gap: 5px; */
+            max-width: 600px;
+        }
+
+        .login-wrapper {
+            background-image: linear-gradient(#00529c, #1d2b38ff, #00529c);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-wrapper {
+            /* background-image: linear-gradient(#00529c, #1d2b38ff, #00529c); */
+            background: #02080ece;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+
+        /* BATAS FORM LOGIN */
+
+
+        .status-pending {
+            /* merah muda */
+            color: #ca071aff;
+            /* teks merah gelap */
+            font-weight: bold;
+        }
+
+        .status-approved {
+            background-color: #d4edda;
+            /* hijau muda */
+            color: #155724;
+            /* teks hijau gelap */
+            font-weight: bold;
+        }
+
+        .status-rejected {
+            background-color: #e2e3e5;
+            /* abu-abu */
+            color: #383d41;
+            /* teks abu gelap */
+            font-weight: bold;
         }
 
         .input-mail {

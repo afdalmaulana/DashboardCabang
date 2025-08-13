@@ -36,11 +36,11 @@ if (isset($_SESSION['user'])) {
 <form action="sign-inHandler.php" method="POST" onsubmit="return showLoading()">
     <div class="login-wrapper">
         <div class="dashboard_login">
-            <div class="form-input">
+            <div class="form-input-login">
                 <!-- <div style="display: flex; flex-direction:row; justify-content:space-between;"> -->
-                <div style="font-size: 32px; margin-top: 12px; font-weight:700">Masukkan User Sesuai Kode UKER</div>
+                <div style="font-size: 32px; margin-top: 12px; font-weight:700">Dashboard My-logistic</div>
                 <!-- </div> -->
-                <p>Masukkan sesuai dengan ketentuan yang berlaku</p>
+                <p>Masukkan username sesuai dengan kode uker</p>
                 <div class="input-mail">
                     <div style="display: flex; flex-direction:column">
                         <label style="display: flex; left:0">Username</label>
