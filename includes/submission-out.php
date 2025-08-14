@@ -23,33 +23,63 @@ $result = $conn->query($query)
                         <th>Tanggal Pengajuan</th>
                         <th>Perihal</th>
                         <th>Status</th>
+                        <!-- <th>Aksi</th> -->
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            // Tentukan kelas CSS sesuai status
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <?php
                             $status = strtolower($row['status']);
-                            $class = '';
-                            if ($status === 'pending') {
-                                $class = 'status-pending';
-                            } elseif ($status === 'approved') {
-                                $class = 'status-approved';
-                            } elseif ($status === 'rejected') {
-                                $class = 'status-rejected';
-                            }
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['kode_pengajuan']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['tanggal_pengajuan']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['perihal']) . "</td>";
-                            echo "<td class='$class'>" . htmlspecialchars($row['status']) . "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo '<tr><td colspan="4" style="text-align:center;">Belum ada Pengajuan</td></tr>';
-                    }
-                    ?>
+                            $class = match ($status) {
+                                'pending' => 'status-pending',
+                                'approved' => 'status-approved',
+                                'rejected' => 'status-rejected',
+                                default => '',
+                            };
+                            ?>
+                            <tr>
+                                <td><?= htmlspecialchars($row['kode_pengajuan']) ?></td>
+                                <td><?= htmlspecialchars($row['tanggal_pengajuan']) ?></td>
+                                <td><?= htmlspecialchars($row['perihal']) ?></td>
+                                <td class="<?= $class ?>"><?= htmlspecialchars($row['status']) ?></td>
+                                <?php if (!((isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050'))): ?>
+                                    <?php if ($row['status'] === 'Pending'): ?>
+                                        <td>
+                                            <button class="button-trash" data-kode="<?= htmlspecialchars($row['kode_pengajuan']) ?>">
+                                                Hapus <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </td>
+                                    <?php else: ?>
+                                        <td>
+                                            <div>Pengajuan di kirim ke Kanwil</div>
+                                        </td>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if ((isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050')): ?>
+                                    <?php if ($row['status'] === 'Pending'): ?>
+                                        <td>
+                                            <div class="actions">
+                                                <button class="button-approve" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="approved">
+                                                    Approve
+                                                </button>
+                                                <button class="button-reject" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="rejected">
+                                                    Reject
+                                                </button>
+                                            </div>
+                                        </td>
+                                    <?php else: ?>
+                                        <td></td>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4" style="text-align:center;">Belum ada Pengajuan</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

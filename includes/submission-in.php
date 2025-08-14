@@ -5,7 +5,11 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: 'Data berhasil disimpan!'
+                text: 'Pengajuan Berhasil!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'index.php?page=submission-out';
             });
         <?php elseif ($_GET['status'] === 'error'): ?>
             Swal.fire({

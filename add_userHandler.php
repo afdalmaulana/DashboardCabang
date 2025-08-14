@@ -12,11 +12,25 @@ if (empty($username) || empty($kode_uker) || empty($password) || empty($role)) {
     exit;
 }
 
-// Ambil nama_uker dari kode_uker
+// 🔒 CEK APAKAH USERNAME SUDAH ADA
+$stmt_check = $conn->prepare("SELECT username FROM users WHERE username = ?");
+$stmt_check->bind_param("s", $username);
+$stmt_check->execute();
+$result_check = $stmt_check->get_result();
+
+if ($result_check->num_rows > 0) {
+    // Username sudah ada
+    header("Location: index.php?page=add-user&status=duplicate");
+    exit;
+}
+$stmt_check->close();
+
+// 🔍 Ambil nama_uker dari kode_uker
 $stmt2 = $conn->prepare("SELECT nama_uker FROM unit_kerja WHERE kode_uker = ?");
 $stmt2->bind_param("s", $kode_uker);
 $stmt2->execute();
 $result2 = $stmt2->get_result();
+
 if ($result2->num_rows === 0) {
     // Kode uker tidak ditemukan
     header("Location: index.php?page=add-user&status=error");
@@ -26,8 +40,8 @@ $row = $result2->fetch_assoc();
 $nama_uker = $row['nama_uker'];
 $stmt2->close();
 
+// 🔐 Hash password dan simpan user
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
 $sql = "INSERT INTO users (username, nama_uker, password, role, kode_uker) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sssss", $username, $nama_uker, $hashed_password, $role, $kode_uker);

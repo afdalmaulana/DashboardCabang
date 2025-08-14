@@ -89,6 +89,29 @@
             dropdown.style.display = "block";
         }
     }
+
+    function buttonactionDropdown(id) {
+        const dropdowns = document.getElementsByClassName("dropdown-contents");
+        for (let i = 0; i < dropdowns.length; i++) {
+            if (dropdowns[i].id !== id) {
+                dropdowns[i].style.display = "none";
+            }
+        }
+
+        const dropdown = document.getElementById(id);
+        if (dropdown) {
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+    }
+    //ini punya dropdown action
+    window.onclick = function(event) {
+        if (!event.target.closest('.dropdown')) {
+            const dropdowns = document.getElementsByClassName("dropdown-contents");
+            for (let i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].style.display = "none";
+            }
+        }
+    };
     window.onclick = function(event) {
         // Cek apakah klik di luar dropdown
         if (!event.target.closest('.dropdown')) {
@@ -98,6 +121,12 @@
             }
         }
     };
+
+    //fitur dropdown tanpa scroll
+
+
+
+    // batas fitur
 
     // function deleteRow(button, id) {
     //     if (confirm("Apakah Anda yakin ingin menghapus surat ini?")) {
@@ -218,4 +247,69 @@
                 button.disabled = false;
             });
     }
+
+
+    //update status
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.button-approve, .button-reject');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const kodePengajuan = this.getAttribute('data-kode');
+                const status = this.getAttribute('data-status');
+
+                if (!kodePengajuan || !status) return;
+
+                if (!confirm(`Yakin ingin ${status.toUpperCase()} pengajuan ${kodePengajuan}?`)) return;
+
+                fetch('update-submissionHandler.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `kode_pengajuan=${encodeURIComponent(kodePengajuan)}&status=${encodeURIComponent(status)}`
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data); // tampilkan pesan dari PHP
+                        location.reload(); // reload halaman supaya status terupdate
+                    })
+                    .catch(error => {
+                        alert("Gagal memperbarui status.");
+                        console.error('Error:', error);
+                    });
+            });
+        });
+    });
+
+    //Hapus Pengajuan
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteButtons = document.querySelectorAll('.button-trash');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const kodePengajuan = this.getAttribute('data-kode');
+                if (!kodePengajuan) return;
+
+                if (!confirm(`Yakin ingin menghapus pengajuan ${kodePengajuan}?`)) return;
+
+                fetch('update-submissionHandler.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `kode_pengajuan=${encodeURIComponent(kodePengajuan)}&status=delete`
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        location.reload(); // refresh agar data terbaru muncul
+                    })
+                    .catch(error => {
+                        alert('Gagal menghapus pengajuan.');
+                        console.error(error);
+                    });
+            });
+        });
+    });
 </script>

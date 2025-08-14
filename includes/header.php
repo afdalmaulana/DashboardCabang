@@ -82,6 +82,7 @@
             position: fixed;
             top: 0;
             left: 0;
+            overflow: auto;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
         }
 
@@ -375,6 +376,28 @@
             text-decoration: none;
         }
 
+        .button-approve {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: black;
+            padding: 6px 10px 6px 10px;
+            border-radius: 10px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+        }
+
+        .button-reject {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: black;
+            padding: 6px 10px 6px 10px;
+            border-radius: 10px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+        }
+
         .button-save {
             background: none;
             border: none;
@@ -394,6 +417,18 @@
 
         .button-trash:hover {
             background: red;
+            color: white;
+            transition: 0.2s ease-in-out;
+        }
+
+        .button-approve:hover {
+            background: #1ac447;
+            color: white;
+            transition: 0.2s ease-in-out;
+        }
+
+        .button-reject:hover {
+            background: #c4251aff;
             color: white;
             transition: 0.2s ease-in-out;
         }
@@ -494,6 +529,8 @@
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 0;
             /* gap: 5px; */
             /* max-width: 500px; */
         }
@@ -513,6 +550,7 @@
             overflow-x: auto;
             overflow-y: auto;
             border-radius: 8px;
+            z-index: 0;
         }
 
         /* Sticky header agar tetap terlihat saat scroll */
@@ -623,13 +661,12 @@
 
         .status-pending {
             /* merah muda */
-            color: #ca071aff;
+            color: #ebbc02ff;
             /* teks merah gelap */
             font-weight: bold;
         }
 
         .status-approved {
-            background-color: #d4edda;
             /* hijau muda */
             color: #155724;
             /* teks hijau gelap */
@@ -637,9 +674,8 @@
         }
 
         .status-rejected {
-            background-color: #e2e3e5;
             /* abu-abu */
-            color: #383d41;
+            color: #ff0000ff;
             /* teks abu gelap */
             font-weight: bold;
         }

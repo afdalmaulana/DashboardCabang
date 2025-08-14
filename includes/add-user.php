@@ -35,6 +35,12 @@ $result = $conn->query($query);
                 title: 'Gagal',
                 text: 'Terjadi kesalahan dalam form, mohon di ulangi'
             })
+        <?php elseif ($_GET['status'] === 'duplicate'): ?>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Kode Uker sudah Terdaftar'
+            })
         <?php elseif ($_GET['status'] === 'incomplete'): ?>
             Swal.fire({
                 icon: 'warning',

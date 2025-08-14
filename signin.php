@@ -6,6 +6,7 @@ if (isset($_SESSION['user'])) {
 }
 ?>
 <?php include 'includes/header.php'; ?>
+<?php include 'includes/footer.php'; ?>
 
 
 <?php if (isset($_GET['status'])): ?>
