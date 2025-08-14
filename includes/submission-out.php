@@ -1,13 +1,23 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require 'db_connect.php';
 
-// PROSES HAPUS (ditangani sebelum output HTML)
 $successMessage = '';
 $errorMessage = '';
 
-$query = "SELECT * FROM pengajuan ORDER BY kode_pengajuan DESC";
-$result = $conn->query($query)
+// Filter query sesuai role
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin' || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050')) {
+    $query = "SELECT * FROM pengajuan ORDER BY kode_pengajuan DESC";
+} else {
+    $kodeUker = $conn->real_escape_string($_SESSION['kode_uker']);
+    $query = "SELECT * FROM pengajuan WHERE kode_uker = '$kodeUker' ORDER BY kode_pengajuan DESC";
+}
+
+$result = $conn->query($query);
 ?>
+
 <div class="dashboard-mailin">
     <div class="mail-in">
         <div class="sub-menu">
@@ -20,10 +30,10 @@ $result = $conn->query($query)
                 <thead>
                     <tr>
                         <th>Kode Pengajuan</th>
+                        <th>Kode Uker</th>
                         <th>Tanggal Pengajuan</th>
                         <th>Perihal</th>
                         <th>Status</th>
-                        <!-- <th>Aksi</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -36,15 +46,33 @@ $result = $conn->query($query)
                                 'pending' => 'status-pending',
                                 'approved' => 'status-approved',
                                 'rejected' => 'status-rejected',
+                                'forward' => 'status-forward',
                                 default => '',
                             };
                             ?>
                             <tr>
                                 <td><?= htmlspecialchars($row['kode_pengajuan']) ?></td>
+                                <td><?= htmlspecialchars($row['kode_uker']) ?></td>
                                 <td><?= htmlspecialchars($row['tanggal_pengajuan']) ?></td>
                                 <td><?= htmlspecialchars($row['perihal']) ?></td>
                                 <td class="<?= $class ?>"><?= htmlspecialchars($row['status']) ?></td>
-                                <?php if (!((isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050'))): ?>
+
+                                <?php if ((isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050')): ?>
+                                    <td>
+                                        <div class="actions">
+                                            <?php if ($row['status'] === 'Pending'): ?>
+                                                <button class="button-approve" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="forward">Forward</button>
+                                                <button class="button-reject" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="rejected">Reject</button>
+                                            <?php elseif ($row['status'] === 'Forward'): ?>
+                                                <button class="button-approve" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="approved">Approve</button>
+                                                <button class="button-reject" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="rejected">Reject</button>
+                                            <?php else: ?>
+                                                <!-- No action buttons for approved/rejected -->
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                <?php else: ?>
+                                    <!-- User biasa -->
                                     <?php if ($row['status'] === 'Pending'): ?>
                                         <td>
                                             <button class="button-trash" data-kode="<?= htmlspecialchars($row['kode_pengajuan']) ?>">
@@ -53,31 +81,16 @@ $result = $conn->query($query)
                                         </td>
                                     <?php else: ?>
                                         <td>
-                                            <div>Pengajuan di kirim ke Kanwil</div>
+                                            <div>Pengajuan dikirim ke Kanwil</div>
                                         </td>
                                     <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ((isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['kode_uker']) && $_SESSION['kode_uker'] === '0050')): ?>
-                                    <?php if ($row['status'] === 'Pending'): ?>
-                                        <td>
-                                            <div class="actions">
-                                                <button class="button-approve" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="approved">
-                                                    Approve
-                                                </button>
-                                                <button class="button-reject" data-kode="<?= $row['kode_pengajuan'] ?>" data-status="rejected">
-                                                    Reject
-                                                </button>
-                                            </div>
-                                        </td>
-                                    <?php else: ?>
-                                        <td></td>
-                                    <?php endif; ?>
-                                <?php endif; ?>
+
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" style="text-align:center;">Belum ada Pengajuan</td>
+                            <td colspan="5" style="text-align:center;">Belum ada Pengajuan</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

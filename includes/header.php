@@ -661,7 +661,7 @@
 
         .status-pending {
             /* merah muda */
-            color: #ebbc02ff;
+            color: #eb7e02ff;
             /* teks merah gelap */
             font-weight: bold;
         }
@@ -676,6 +676,12 @@
         .status-rejected {
             /* abu-abu */
             color: #ff0000ff;
+            /* teks abu gelap */
+            font-weight: bold;
+        }
+
+        .status-forward {
+            color: #ffee00ff;
             /* teks abu gelap */
             font-weight: bold;
         }

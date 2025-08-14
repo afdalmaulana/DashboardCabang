@@ -251,16 +251,33 @@
 
     //update status
     document.addEventListener('DOMContentLoaded', function() {
+        // Ambil semua tombol dengan class approve atau reject
         const buttons = document.querySelectorAll('.button-approve, .button-reject');
 
         buttons.forEach(button => {
             button.addEventListener('click', function() {
                 const kodePengajuan = this.getAttribute('data-kode');
-                const status = this.getAttribute('data-status');
+                const status = this.getAttribute('data-status'); // expected: forward, approved, rejected
 
                 if (!kodePengajuan || !status) return;
 
-                if (!confirm(`Yakin ingin ${status.toUpperCase()} pengajuan ${kodePengajuan}?`)) return;
+                // Buat teks konfirmasi yang lebih natural
+                let actionText = '';
+                switch (status) {
+                    case 'forward':
+                        actionText = 'meneruskan';
+                        break;
+                    case 'approved':
+                        actionText = 'menyetujui';
+                        break;
+                    case 'rejected':
+                        actionText = 'menolak';
+                        break;
+                    default:
+                        actionText = `mengubah status menjadi ${status}`;
+                }
+
+                if (!confirm(`Yakin ingin ${actionText} pengajuan ${kodePengajuan}?`)) return;
 
                 fetch('update-submissionHandler.php', {
                         method: 'POST',
@@ -269,10 +286,13 @@
                         },
                         body: `kode_pengajuan=${encodeURIComponent(kodePengajuan)}&status=${encodeURIComponent(status)}`
                     })
-                    .then(response => response.text())
+                    .then(response => {
+                        if (!response.ok) throw new Error('Terjadi kesalahan pada server.');
+                        return response.text();
+                    })
                     .then(data => {
-                        alert(data); // tampilkan pesan dari PHP
-                        location.reload(); // reload halaman supaya status terupdate
+                        alert(data); // tampilkan respon dari handler PHP
+                        location.reload(); // reload agar tampilan terbaru muncul
                     })
                     .catch(error => {
                         alert("Gagal memperbarui status.");
