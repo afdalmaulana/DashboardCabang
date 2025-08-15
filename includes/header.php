@@ -478,6 +478,21 @@
             transition: 0.2s ease-in-out;
         }
 
+        .button-signin {
+            width: 100%;
+            border-radius: 10px;
+            background: #00529c;
+            color: white;
+            border: none;
+            padding: 6px;
+        }
+
+        .button-signin:hover {
+            color: white;
+            background: #1ac447;
+            transition: 0.2s ease-in-out;
+        }
+
         .button-log {
             background: #00529c;
             text-decoration: none;
@@ -619,14 +634,25 @@
 
         /* FORM LOGIN */
         .form-input-login {
-            border: 6px solid #dbe5edff;
-            padding: 20px 40px 30px 40px;
-            /* max-height: 550px; */
+            /* border: 6px solid #dbe5edff; */
+            padding: 60px 40px 10px 40px;
+            min-height: 400px;
+            min-width: 400px;
+            color: white;
             overflow-y: auto;
             border-radius: 20px;
             text-align: center;
             justify-content: center;
-            background-image: linear-gradient(#dbe5edff, #dfe7edff, #dbe5edff);
+            justify-items: center;
+            align-items: center;
+            /* background-image: linear-gradient(#dbe5edff, #dfe7edff, #dbe5edff); */
+            background: rgba(25, 25, 35, 0.45);
+            /* Dark navy-like with transparency */
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            /* Soft shadow */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
         }
 
         .dashboard_login {
@@ -704,7 +730,9 @@
         .list-input:focus {
             outline: none;
             border: none;
-            box-shadow: 0 0 0 2px #3399ff;
+            margin-top: 1px;
+            box-shadow: 0 0 0 4px #00529c;
+            transition: 0.2s ease-in-out;
         }
 
 
